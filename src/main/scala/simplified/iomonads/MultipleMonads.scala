@@ -24,12 +24,12 @@ object MultipleMonads extends App {
     * main loop: Prompt a user for some input, then push that input
     * onto a stack
     */
-  val res = for {
+ /* val res = for {
     _     <- putStrLn("Type anything:")   //IO
     input <- getLine                      //IO
     _     <- push(input)                  //StateV2
     _     <- putStrLn(s"Input: $input")   //IO
-  } yield ()
+  } yield ()*/
 
   /*putStrLn("Type anything:").flatMap { _ => // Unit => IO
    getLine.flatMap { input =>  // String => IO
