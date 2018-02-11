@@ -1,8 +1,10 @@
 package usercases.mtransfomer
 
-trait Monad[F[_]] {
+trait Monad[M[_]] {
 
-  def map[A, B] (fa: F[A]) (f: A => B): F[B]
+  def pure[A] (a: A): M[A]
 
-  def flatMap[A, B] (fa: F[A]) (f: A => F[B]): F[B]
+  def map[A, B] (fa: M[A]) (f: A => B): M[B]
+
+  def flatMap[A, B] (fa: M[A]) (f: A => M[B]): M[B]
 }

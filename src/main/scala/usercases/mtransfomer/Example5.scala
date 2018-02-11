@@ -1,5 +1,8 @@
 package usercases.mtransfomer
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
 object Example5 extends App {
 
   val repository = new Repository
@@ -12,20 +15,23 @@ object Example5 extends App {
     def flatMap[B] (f: A => WhateverOpt[W, B]) (implicit M: Monad[W]): WhateverOpt[W, B] =
       WhateverOpt(M.flatMap(value)(optA => optA match {
         case Some(v) => f(v).value
+        case None => M.pure(None)
       }))
   }
 
-  implicit val optionTMonad = new Monad[Option] {
+  implicit val futureMonad = new Monad[Future] {
+    override def pure[A](a: A): Future[A] = Future.successful(a)
 
-    override def map[A, B](fa: Option[A])(f: A => B): Option[B] = fa.map(f)
-    override def flatMap[A, B](fa: Option[A])(f: A => Option[B]): Option[B] = fa.flatMap(f)
+    override def map[A, B](fa: Future[A])(f: A => B): Future[B] = fa.map(f)
+
+    override def flatMap[A, B](fa: Future[A])(f: A => Future[B]): Future[B] = fa.flatMap(f)
   }
 
-  val optionResult = for {
+  val optionResult: WhateverOpt[Future, String] = for {
     user <- WhateverOpt(repository.getUserOption(1))
     addres <- WhateverOpt(repository.getAddressOption(user))
   } yield addres.city
 
   Thread.sleep(1000)
-  println(s"City: $optionResult")
+  println(s"City: ${optionResult}")
 }
