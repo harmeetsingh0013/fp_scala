@@ -18,10 +18,16 @@ object MonadTProblem extends App {
     _ <- printStr(s"Add new Score")
     score <- getInt
     _ <- push(score)
-    _ <- printStr("(q)uit or (c)ontinue ... ")
-    r <- getString
-    _ <- if(r.trim.equalsIgnoreCase("q")) IO { Unit } else main
+    _ <- if(score == 0) IO { Unit } else main
   } yield ()
 
   main.run*/
+
+  /*printStr(s"Add new Score").flatMap { _ =>
+    getInt.flatMap { _ =>
+      push { score =>
+        if(score == 0) IO { Unit } else main
+      }
+    }
+  }*/
 }

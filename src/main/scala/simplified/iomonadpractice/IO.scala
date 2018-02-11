@@ -6,8 +6,11 @@ class IO[A] private (run0: => A) {
 
   def map[B](f: A => B): IO[B] = flatMap(a => IO(f(a)))
 
-  def flatMap[B] (f: A => IO[B]): IO[B] = IO { f(run).run }
-
+  def flatMap[B] (f: A => IO[B]): IO[B] = {
+    val res1 = f(run)
+    val res2 = res1.run
+    IO(res2)
+  }
 }
 
 object IO {
