@@ -40,8 +40,8 @@ object Example3 extends App {
 
   val result = for {
     user <- FutOpt(repository.getUserOption(1))
-    addres <- FutOpt(repository.getAddressOption(user))
-  } yield addres.city
+    address <- FutOpt(repository.getAddressOption(user))
+  } yield address.city
 
   Thread.sleep(1000)
   println(s"City: $result")

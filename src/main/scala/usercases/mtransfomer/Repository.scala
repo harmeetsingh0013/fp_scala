@@ -21,4 +21,11 @@ class Repository {
   def getUsersOption: List[Option[User]] = List(Some(User(1, "James")), Some(User(2, "Micky")))
   def getAddressesOption(user: User): List[Option[Address]] =
     List(Some(Address(1, 1, "Moga")), Some(Address(2, 2, "Noida")))
+
+  // some new methods
+  def getUserAgeByName(name: String): Future[Int] = Future.successful(13)
+  def getUserFirstName(id: Int): Option[String] = Some("James")
+
+  // side effects operations
+
 }

@@ -17,8 +17,8 @@ object Example4 extends App {
 
   val result: ListOpt[String] = for {
     user <- ListOpt(repository.getUsersOption)
-    addres <- ListOpt(repository.getAddressesOption(user))
-  } yield addres.city
+    address <- ListOpt(repository.getAddressesOption(user))
+  } yield address.city
 
   Thread.sleep(1000)
   println(s"City: $result")
