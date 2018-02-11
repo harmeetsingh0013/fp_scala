@@ -16,4 +16,9 @@ class Repository {
     Future.successful(Some(User(1, "James")))
   def getAddressOption(user: User): Future[Option[Address]] =
     Future.successful(Some(Address(1, 1, "Moga")))
+
+  // lists of options
+  def getUsersOption: List[Option[User]] = List(Some(User(1, "James")), Some(User(2, "Micky")))
+  def getAddressesOption(user: User): List[Option[Address]] =
+    List(Some(Address(1, 1, "Moga")), Some(Address(2, 2, "Noida")))
 }
