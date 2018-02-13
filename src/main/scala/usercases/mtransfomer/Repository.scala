@@ -26,6 +26,4 @@ class Repository {
   def getUserAgeByName(name: String): Future[Int] = Future.successful(13)
   def getUserFirstName(id: Int): Option[String] = Some("James")
 
-  // side effects operations
-
 }
