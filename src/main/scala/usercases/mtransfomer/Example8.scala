@@ -1,13 +1,14 @@
 package usercases.mtransfomer
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Example8 extends App {
 
 
   // side effects operations
   def getUserOption(id: Int): Future[Option[User]] =
-    Future.successful(Some(User(1, "James")))
+    Future.successful(Some(User(13, "James")))
 
   def checkCanBeUpdated(u: User): Future[Boolean] =
     Future.successful(true)
@@ -26,5 +27,7 @@ object Example8 extends App {
     }
   }
 
-
+  val user = updateUser(User(13, "Jimmy"))
+  Thread.sleep(1000)
+  println(s"User After Update: $user")
 }

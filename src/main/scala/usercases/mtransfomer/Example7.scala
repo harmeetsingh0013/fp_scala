@@ -18,8 +18,8 @@ object Example7 extends App {
   val result2 = for {
     user <- OptionT(repository.getUserOption(13))
     age <- OptionT.liftF(repository.getUserAgeByName(user.name))
-    firstname <- OptionT.fromOption(repository.getUserFirstName(user.id))
-  } yield (age, firstname)
+    firstName <- OptionT.fromOption(repository.getUserFirstName(user.id))
+  } yield (age, firstName)
 
   Thread.sleep(1000)
   println(s"Tuple: $result2")
